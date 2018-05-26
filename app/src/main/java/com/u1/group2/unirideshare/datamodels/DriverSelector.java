@@ -25,7 +25,8 @@ public class DriverSelector extends AppCompatActivity {
         johnDriver = findViewById(R.id.johnDriver);
         robertDriver = findViewById(R.id.robertDriver);
 
-        //paulDriverUser = User();
+        paulDriverUser = new User("Paul", "Paul", "paul.paul@gmail.com", "45 Windsor rd Kelvin Grove 4059", "UQ", 19, 5, "254TFG");
+        johnDriverUser = new User("John", "John", "john.john@gmail.com", "45 Windsor rd Kelvin Grove 4059", "UQ", 19, 5, "254TFG");
 
     }
 }

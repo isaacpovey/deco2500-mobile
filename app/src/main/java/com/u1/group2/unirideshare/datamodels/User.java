@@ -14,8 +14,9 @@ public class User implements Parcelable {
     private String uni;
     private String licencePlate;
     private Integer age;
+    private Integer rating;
 
-    public User(String firstName, String lastName, String emailAddress, String homeAddress, String uni, Integer age, String licencePlate) {
+    public User(String firstName, String lastName, String emailAddress, String homeAddress, String uni, Integer age, Integer rating, String licencePlate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
@@ -23,6 +24,7 @@ public class User implements Parcelable {
         this.uni = uni;
         this.licencePlate = licencePlate;
         this.age = age;
+        this.rating = rating;
     }
 
     public String getFirstName() {
@@ -55,6 +57,14 @@ public class User implements Parcelable {
 
     public void setHomeAddress(String homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 
     @Override
@@ -111,6 +121,8 @@ public class User implements Parcelable {
         uni = in.readString();
         licencePlate = in.readString();
         age = in.readInt();
+        rating = in.readInt();
+
     }
 
     @Override
@@ -127,6 +139,7 @@ public class User implements Parcelable {
         dest.writeString(uni);
         dest.writeString(licencePlate);
         dest.writeInt(age);
+        dest.writeInt(rating);
     }
 
     @SuppressWarnings("unused")
