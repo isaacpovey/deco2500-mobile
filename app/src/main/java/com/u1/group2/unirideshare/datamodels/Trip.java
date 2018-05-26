@@ -3,7 +3,13 @@ package com.u1.group2.unirideshare.datamodels;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Trip implements Parcelable {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
+public class Trip implements Parcelable, Comparable<Trip>{
 
     String day;
     Boolean toUni;
@@ -92,5 +98,35 @@ public class Trip implements Parcelable {
 
     public void setRepeating(Boolean repeating) {
         this.repeating = repeating;
+    }
+
+    @Override
+    public int compareTo(Trip anotherTrip) {
+        if (this.equals(anotherTrip)) {
+            return 0;
+        } else if (this.day.equals(anotherTrip.day)){
+            return this.time.compareTo(anotherTrip.time);
+        } else {
+            int tripDay = parseDayOfWeek(this.day, Locale.US);
+            int anotherTripDay = parseDayOfWeek(anotherTrip.day, Locale.US);
+            if (tripDay < anotherTripDay) {
+                return -1;
+            } else if (tripDay > anotherTripDay) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    private static int parseDayOfWeek(String day, Locale locale) {
+        try {
+            SimpleDateFormat dayFormat = new SimpleDateFormat("E", locale);
+            Date date = dayFormat.parse(day);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            return calendar.get(Calendar.DAY_OF_WEEK);
+        } catch (Exception  e) {
+            return 0;
+        }
     }
 }

@@ -16,10 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.u1.group2.unirideshare.datamodels.DriverSelector;
 import com.u1.group2.unirideshare.datamodels.DriverTrip;
 import com.u1.group2.unirideshare.datamodels.RiderTrip;
-import com.u1.group2.unirideshare.datamodels.Trip;
 import com.u1.group2.unirideshare.datamodels.User;
 import java.util.ArrayList;
 
@@ -141,8 +139,8 @@ public class CreateTrip extends AppCompatActivity {
                                 address.getText().toString(),
                                 new ArrayList<User>()
                         );
-                        Intent intent = new Intent(CreateTrip.this, DriverSelector.class    );
-                        intent.putExtra("TRIP", trip);
+                        Intent intent = new Intent(CreateTrip.this, Dashboard.class    );
+                        intent.putExtra("DRIVER_TRIP", trip);
                         startActivity(intent);
                    } else {
                        RiderTrip trip = new RiderTrip(
@@ -154,7 +152,7 @@ public class CreateTrip extends AppCompatActivity {
                                address.getText().toString()
                        );
                        Intent intent = new Intent(CreateTrip.this, DriverSelector.class);
-                       intent.putExtra("TRIP", trip);
+                       intent.putExtra("RIDER_TRIP", trip);
                        startActivity(intent);
                    }
                } else {

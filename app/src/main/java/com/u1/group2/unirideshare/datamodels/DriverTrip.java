@@ -18,7 +18,8 @@ public class DriverTrip extends Trip {
 
     public void writeToParcel(Parcel out, int flags) {
         super.writeToParcel(out, flags);
-        out.writeParcelableArray((User[]) riders.toArray(), 0);
+        User[] ridersArray = riders.toArray(new User[riders.size()]);
+        out.writeTypedArray(ridersArray, 0);
     }
 
     public static final Parcelable.Creator<Trip> CREATOR
@@ -34,7 +35,13 @@ public class DriverTrip extends Trip {
 
     private DriverTrip(Parcel in) {
         super(in);
-        riders = new ArrayList<User>(Arrays.asList((User[]) in.readParcelableArray(User.class.getClassLoader())));
+        Parcelable[] resultArray = in.readParcelableArray(User.class.getClassLoader());
+        if (resultArray != null) {
+            User[] ridersArray = Arrays.copyOf(resultArray, resultArray.length, User[].class);
+            riders = new ArrayList<User>(Arrays.asList(ridersArray));
+        } else {
+            riders = new ArrayList<User>();
+        }
     }
 
     public ArrayList<User> getRiders() {
