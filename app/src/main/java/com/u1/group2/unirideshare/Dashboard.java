@@ -15,7 +15,6 @@ import com.u1.group2.unirideshare.components.TripViewAdapter;
 import com.u1.group2.unirideshare.datamodels.DriverTrip;
 import com.u1.group2.unirideshare.datamodels.RiderTrip;
 import com.u1.group2.unirideshare.datamodels.Trip;
-import com.u1.group2.unirideshare.datamodels.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,7 +36,7 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        this.tripsRecyclerView = (RecyclerView) findViewById(R.id.tripsView);
+        this.tripsRecyclerView = findViewById(R.id.tripsView);
         this.tripsRecyclerView.setHasFixedSize(true);
         this.tripsLayoutManager = new LinearLayoutManager(this);
         this.tripsRecyclerView.setLayoutManager(this.tripsLayoutManager);
