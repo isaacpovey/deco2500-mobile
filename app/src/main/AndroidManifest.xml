@@ -3,6 +3,7 @@
     package="com.u1.group2.unirideshare">
 
     <application
+        android:name="com.u1.group2.unirideshare.DefaultApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,6 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateTrip" />
+        <activity android:name=".DriverSelector" />
     </application>
 
 </manifest>
