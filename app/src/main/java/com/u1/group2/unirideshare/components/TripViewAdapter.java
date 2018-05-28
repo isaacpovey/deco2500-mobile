@@ -1,10 +1,12 @@
 package com.u1.group2.unirideshare.components;
 
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.u1.group2.unirideshare.R;
@@ -24,6 +26,8 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
         private TextView tripDetails;
         private TextView tripInfo;
         private TextView tripPeople;
+        private Button organise;
+        private Button startTrip;
 
         public ViewHolder(View v) {
             super(v);
@@ -32,6 +36,8 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
             tripDetails = (TextView) v.findViewById(R.id.tripDetails);
             tripInfo = (TextView) v.findViewById(R.id.tripInfo);
             tripPeople = (TextView) v.findViewById(R.id.tripPeople);
+            organise = (Button) v.findViewById(R.id.organise);
+            startTrip = (Button) v.findViewById(R.id.startTrip);
         }
     }
 
@@ -64,6 +70,7 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
         try {
             DriverTrip driverTrip = (DriverTrip) trip;
             isDriver = "as Driver";
+            holder.startTrip.setVisibility(View.VISIBLE);
             if (driverTrip.getRiders().size() > 0) {
                 tripInfo = "Picking Up";
                 people = "";
@@ -94,5 +101,13 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
         super.onAttachedToRecyclerView(recyclerView);
     }
 
+    private View.OnClickListener generateOnclickOrganise() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent();
+            }
+        };
+    }
 
 }

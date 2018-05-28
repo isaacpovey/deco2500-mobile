@@ -30,6 +30,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CreateTrip" />
+        <activity android:name=".DriverSelector" />
+        <activity
+            android:name=".EditTrip"
+            android:label="@string/title_activity_edit_trip"></activity>
         <activity
             android:name=".PersonalDetails"
             android:windowSoftInputMode="stateHidden|adjustResize" />
