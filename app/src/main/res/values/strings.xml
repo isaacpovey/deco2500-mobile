@@ -15,4 +15,8 @@
         <item>Arrive By</item>
         <item>Leave By</item>
     </string-array>
+    <string name="title_activity_edit_trip">EditTrip</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
