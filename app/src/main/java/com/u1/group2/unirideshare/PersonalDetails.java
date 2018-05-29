@@ -12,7 +12,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class PersonalDetails extends AppCompatActivity {
 
-    private FirebaseUser user;
     private String email;
     TextView firstName;
     TextView lastName;
@@ -31,7 +30,6 @@ public class PersonalDetails extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        user = extras.getParcelable("USER");
 
         email = extras.getString("EMAIL");
 
@@ -47,7 +45,6 @@ public class PersonalDetails extends AppCompatActivity {
 
     private void continueSignup() {
         Intent intent = new Intent(PersonalDetails.this, AddressDetails.class);
-        intent.putExtra("USER", user);
         intent.putExtra("EMAIL", email);
         intent.putExtra("FIRST_NAME", firstName.getText().toString());
         intent.putExtra("LAST_NAME", lastName.getText().toString());

@@ -15,7 +15,6 @@ import io.paperdb.Paper;
 
 public class AddressDetails extends AppCompatActivity {
 
-    private FirebaseUser user;
     private String email;
     private String firstName;
     private String lastName;
@@ -34,7 +33,6 @@ public class AddressDetails extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        user = extras.getParcelable("USER");
         email = extras.getString("EMAIL");
         firstName = extras.getString("FIRST_NAME");
         lastName = extras.getString("LAST_NAME");
@@ -54,7 +52,6 @@ public class AddressDetails extends AppCompatActivity {
 
     private void continueSignup() {
         Intent intent = new Intent(AddressDetails.this, Dashboard.class);
-        Paper.book().write("FIREBASE_USER", user);
         Paper.book().write("USER", new User(firstName, lastName, email, homeAddress.getText().toString(), uni.getText().toString(), 20, 5, ""));
         startActivity(intent);
     }
