@@ -30,15 +30,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateTrip" />
-        <activity android:name=".DriverSelector" />
-        <activity
-            android:name=".EditTrip"
-            android:label="@string/title_activity_edit_trip"></activity>
         <activity
             android:name=".PersonalDetails"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".AddressDetails"></activity>
+        <activity android:name=".AddressDetails" />
+        <activity
+            android:name=".EditTripDriver"
+            android:label="@string/title_activity_edit_trip_driver"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditTripRider"></activity>
     </application>
 
 </manifest>

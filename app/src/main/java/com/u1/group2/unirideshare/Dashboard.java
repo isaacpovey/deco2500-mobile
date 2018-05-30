@@ -25,8 +25,8 @@ import io.paperdb.Paper;
 
 public class Dashboard extends AppCompatActivity {
 
-    HashMap<Integer, DriverTrip> driverTrips;
-    HashMap<Integer, RiderTrip> riderTrips;
+    ArrayList<DriverTrip> driverTrips;
+    ArrayList<RiderTrip> riderTrips;
     private RecyclerView tripsRecyclerView;
     private RecyclerView.Adapter tripsAdapter;
     private RecyclerView.LayoutManager tripsLayoutManager;
@@ -53,13 +53,21 @@ public class Dashboard extends AppCompatActivity {
         if (extras != null) {
             RiderTrip riderTrip = extras.getParcelable("RIDER_TRIP");
             DriverTrip driverTrip = extras.getParcelable("DRIVER_TRIP");
+            DriverTrip cancelledDriverTrip = extras.getParcelable("CANCELLED_DRIVER_TRIP");
+            RiderTrip cancelledRiderTrip = extras.getParcelable("CANCELLED_RIDER_TRIP");
             if (driverTrip != null) {
-                this.driverTrips.put(driverTrips.size(), driverTrip);
+                this.driverTrips.add( driverTrip);
                 Paper.book().write("driverTrips", driverTrips);
             }
             if (riderTrip != null) {
-                this.riderTrips.put(riderTrips.size(), riderTrip);
+                this.riderTrips.add(riderTrip);
                 Paper.book().write("riderTrips", riderTrips);
+            }
+            if (cancelledDriverTrip != null) {
+                this.driverTrips.remove(cancelledDriverTrip);
+            }
+            if (cancelledRiderTrip != null) {
+                this.riderTrips.remove(cancelledRiderTrip);
             }
         }
 
@@ -70,8 +78,8 @@ public class Dashboard extends AppCompatActivity {
         }
 
         ArrayList<Trip> tripsData = new ArrayList<Trip>();
-        tripsData.addAll(this.driverTrips.values());
-        tripsData.addAll(this.riderTrips.values());
+        tripsData.addAll(this.driverTrips);
+        tripsData.addAll(this.riderTrips);
 
         this.tripsAdapter = new TripViewAdapter(tripsData);
         this.tripsRecyclerView.setAdapter(this.tripsAdapter);

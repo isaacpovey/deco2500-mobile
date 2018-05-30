@@ -1,5 +1,6 @@
 package com.u1.group2.unirideshare.components;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.u1.group2.unirideshare.EditTripDriver;
+import com.u1.group2.unirideshare.EditTripRider;
 import com.u1.group2.unirideshare.R;
 import com.u1.group2.unirideshare.datamodels.DriverTrip;
 import com.u1.group2.unirideshare.datamodels.RiderTrip;
@@ -68,7 +71,7 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
             toUni = "to Uni";
         }
         try {
-            DriverTrip driverTrip = (DriverTrip) trip;
+            final DriverTrip driverTrip = (DriverTrip) trip;
             isDriver = "as Driver";
             holder.startTrip.setVisibility(View.VISIBLE);
             if (driverTrip.getRiders().size() > 0) {
@@ -80,14 +83,42 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
             } else {
                 tripInfo = "Waiting for";
             }
+            holder.organise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, EditTripDriver.class);
+                    intent.putExtra("DRIVER_TRIP", driverTrip);
+                    context.startActivity(intent);
+                }
+            });
+            holder.startTrip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, EditTripDriver.class);
+                    intent.putExtra("DRIVER_TRIP", driverTrip);
+                    context.startActivity(intent);
+                }
+            });
         } catch (Exception e) {
-            RiderTrip riderTrip = (RiderTrip) trip;
+            final RiderTrip riderTrip = (RiderTrip) trip;
             people = riderTrip.getDriver().getFirstName();
+            holder.organise.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Context context = v.getContext();
+                    Intent intent = new Intent(context, EditTripRider.class);
+                    intent.putExtra("RIDER_TRIP", riderTrip);
+                    context.startActivity(intent);
+                }
+            });
         }
         holder.tripTitle.setText(String.format("%s %s", trip.getDay(), recuringTrip));
         holder.tripDetails.setText(String.format("%s %s %s", trip.getTime(), toUni, isDriver));
         holder.tripInfo.setText(tripInfo);
         holder.tripPeople.setText(people);
+
     }
 
 
@@ -99,15 +130,6 @@ public class TripViewAdapter extends RecyclerView.Adapter<TripViewAdapter.ViewHo
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-    }
-
-    private View.OnClickListener generateOnclickOrganise() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent();
-            }
-        };
     }
 
 }
