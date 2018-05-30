@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class DriverTrip extends Trip {
 
@@ -19,7 +20,7 @@ public class DriverTrip extends Trip {
     public void writeToParcel(Parcel out, int flags) {
         super.writeToParcel(out, flags);
         User[] ridersArray = riders.toArray(new User[riders.size()]);
-        out.writeTypedArray(ridersArray, 0);
+        out.writeParcelableArray(ridersArray, 0);
     }
 
     public static final Parcelable.Creator<Trip> CREATOR
@@ -63,5 +64,20 @@ public class DriverTrip extends Trip {
 
     public void removeRider(User rider){
         this.riders.remove(rider);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DriverTrip that = (DriverTrip) o;
+        return Objects.equals(riders, that.riders);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), riders);
     }
 }

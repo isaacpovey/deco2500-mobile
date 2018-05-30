@@ -33,7 +33,12 @@
         <activity
             android:name=".PersonalDetails"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity android:name=".AddressDetails"></activity>
+        <activity android:name=".AddressDetails" />
+        <activity
+            android:name=".EditTripDriver"
+            android:label="@string/title_activity_edit_trip_driver"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EditTripRider"></activity>
     </application>
 
 </manifest>

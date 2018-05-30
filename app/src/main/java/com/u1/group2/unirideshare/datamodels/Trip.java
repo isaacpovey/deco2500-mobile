@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class Trip implements Parcelable, Comparable<Trip>{
 
@@ -128,5 +129,24 @@ public class Trip implements Parcelable, Comparable<Trip>{
         } catch (Exception  e) {
             return 0;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Trip trip = (Trip) o;
+        return Objects.equals(day, trip.day) &&
+                Objects.equals(toUni, trip.toUni) &&
+                Objects.equals(arriveBy, trip.arriveBy) &&
+                Objects.equals(time, trip.time) &&
+                Objects.equals(repeating, trip.repeating) &&
+                Objects.equals(departingAddress, trip.departingAddress);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(day, toUni, arriveBy, time, repeating, departingAddress);
     }
 }

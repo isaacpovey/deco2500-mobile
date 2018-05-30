@@ -3,10 +3,26 @@ package com.u1.group2.unirideshare.datamodels;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
 
 
 public class RiderTrip extends Trip implements Parcelable {
     private User driver;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        RiderTrip riderTrip = (RiderTrip) o;
+        return Objects.equals(driver, riderTrip.driver);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(super.hashCode(), driver);
+    }
 
     public RiderTrip(String day, Boolean toUni, Boolean arriveBy, String time, Boolean repeating, String departingAddress) {
         super(day, toUni, arriveBy, time, repeating, departingAddress);

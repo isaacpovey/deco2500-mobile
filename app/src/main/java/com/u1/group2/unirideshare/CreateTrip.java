@@ -20,6 +20,7 @@ import com.u1.group2.unirideshare.datamodels.DriverTrip;
 import com.u1.group2.unirideshare.datamodels.RiderTrip;
 import com.u1.group2.unirideshare.datamodels.User;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreateTrip extends AppCompatActivity {
 
@@ -137,8 +138,9 @@ public class CreateTrip extends AppCompatActivity {
                                 setTime.getText().toString(),
                                 weeklyCheckBox.isChecked(),
                                 address.getText().toString(),
-                                new ArrayList<User>()
-                        );
+                                new ArrayList<User>(Arrays.asList(new User("Paul", "Paul", "paul.paul@gmail.com", "45 Windsor Rd Kelvin Grove 4059", "UQ", 19, 5, "254TFG"),
+                                        new User("John", "John", "john.john@gmail.com", "389 Newmarket Rd Newmarket 4051", "UQ", 20, 3, "324AGD"))
+                        ));
                         Intent intent = new Intent(CreateTrip.this, Dashboard.class    );
                         intent.putExtra("DRIVER_TRIP", trip);
                         startActivity(intent);
@@ -150,6 +152,7 @@ public class CreateTrip extends AppCompatActivity {
                                setTime.getText().toString(),
                                weeklyCheckBox.isChecked(),
                                address.getText().toString()
+
                        );
                        Intent intent = new Intent(CreateTrip.this, DriverSelector.class);
                        intent.putExtra("RIDER_TRIP", trip);
