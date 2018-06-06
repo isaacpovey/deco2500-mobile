@@ -15,6 +15,18 @@
         <item>Arrive By</item>
         <item>Leave By</item>
     </string-array>
+    <string-array name="uni">
+        <item>To Uni</item>
+        <item>From Uni</item>
+    </string-array>
+    <string-array name="driver">
+        <item>Driver</item>
+        <item>Passenger</item>
+    </string-array>
+    <string-array name="repeating">
+        <item>Once</item>
+        <item>Repeating</item>
+    </string-array>
     <string name="title_activity_signup">Signup</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_login">Sign in</string>

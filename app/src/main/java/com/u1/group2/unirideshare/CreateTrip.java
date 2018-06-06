@@ -25,15 +25,12 @@ import java.util.Arrays;
 public class CreateTrip extends AppCompatActivity {
 
     TextView setTime;
-    CheckBox toUniCheckBox;
-    CheckBox fromUniCheckBox;
-    CheckBox driverCheckBox;
-    CheckBox passengerCheckBox;
-    CheckBox onceCheckBox;
-    CheckBox weeklyCheckBox;
     EditText address;
     Spinner daySelector;
     Spinner timeSelector;
+    Spinner uniSelector;
+    Spinner driverSelector;
+    Spinner repeatingSelector;
     Button submitButton;
 
 
@@ -43,28 +40,18 @@ public class CreateTrip extends AppCompatActivity {
         setContentView(R.layout.activity_create_trip);
 
         setTime = findViewById(R.id.timeText);
-        toUniCheckBox = findViewById(R.id.toUniCheckBox);
-        fromUniCheckBox = findViewById(R.id.fromUniCheckBox);
-        driverCheckBox = findViewById(R.id.driverCheckBox);
-        passengerCheckBox = findViewById(R.id.passengerCheckBox);
-        onceCheckBox = findViewById(R.id.onceCheckBox);
-        weeklyCheckBox = findViewById(R.id.weeklyCheckBox);
+
         address = findViewById(R.id.addressTextField);
         submitButton = findViewById(R.id.submitButton);
         daySelector = findViewById(R.id.daySelector);
         timeSelector = findViewById(R.id.timeSelector);
+        uniSelector = findViewById(R.id.uniSelector);
+        driverSelector = findViewById(R.id.driverSelector);
+        repeatingSelector = findViewById(R.id.repeatingSelector);
 
-        setCheckBoxListener(toUniCheckBox, fromUniCheckBox);
-        setCheckBoxListener(driverCheckBox, passengerCheckBox);
-        setCheckBoxListener(onceCheckBox, weeklyCheckBox);
         setTime.setOnClickListener(getTimeListener());
         submitButton.setOnClickListener(getButtonListener());
 
-    }
-
-    protected void setCheckBoxListener(CheckBox checkBox1, CheckBox checkBox2) {
-        checkBox1.setOnCheckedChangeListener(getCheckBoxListener(checkBox2));
-        checkBox2.setOnCheckedChangeListener(getCheckBoxListener(checkBox1));
     }
 
     protected CompoundButton.OnCheckedChangeListener getCheckBoxListener(CheckBox toToggle) {
@@ -101,13 +88,6 @@ public class CreateTrip extends AppCompatActivity {
         };
     }
 
-    protected boolean checkFormFilled() {
-        return (toUniCheckBox.isChecked() || fromUniCheckBox.isChecked()) &&
-                (driverCheckBox.isChecked() || passengerCheckBox.isChecked()) &&
-                (weeklyCheckBox.isChecked() || onceCheckBox.isChecked()) &&
-                !(address.getText().toString().equals(""));
-    }
-
     protected AlertDialog generateNotFilledOutPopup() {
         AlertDialog.Builder builder1 = new AlertDialog.Builder(CreateTrip.this);
         builder1.setMessage("Please fill out all forms.");
@@ -129,14 +109,14 @@ public class CreateTrip extends AppCompatActivity {
         return new View.OnClickListener() {
            @Override
            public void onClick(View view){
-               if (checkFormFilled()) {
-                   if (driverCheckBox.isChecked()) {
+               if (!(address.getText().toString().equals(""))) {
+                   if (driverSelector.getSelectedItem().toString().equals("Driver")) {
                         DriverTrip trip = new DriverTrip(
                                 daySelector.getSelectedItem().toString(),
-                                toUniCheckBox.isChecked(),
+                                uniSelector.getSelectedItem().toString().equals("To Uni"),
                                 timeSelector.getSelectedItem().toString().equals("Arrive By"),
                                 setTime.getText().toString(),
-                                weeklyCheckBox.isChecked(),
+                                repeatingSelector.getSelectedItem().toString().equals("Repeating"),
                                 address.getText().toString(),
                                 new ArrayList<User>(Arrays.asList(new User("Paul", "Paul", "paul.paul@gmail.com", "45 Windsor Rd Kelvin Grove 4059", "UQ", 19, 5, "254TFG"),
                                         new User("John", "John", "john.john@gmail.com", "389 Newmarket Rd Newmarket 4051", "UQ", 20, 3, "324AGD"))
@@ -147,10 +127,10 @@ public class CreateTrip extends AppCompatActivity {
                    } else {
                        RiderTrip trip = new RiderTrip(
                                daySelector.getSelectedItem().toString(),
-                               toUniCheckBox.isChecked(),
+                               uniSelector.getSelectedItem().toString().equals("To Uni"),
                                timeSelector.getSelectedItem().toString().equals("Arrive By"),
                                setTime.getText().toString(),
-                               weeklyCheckBox.isChecked(),
+                               repeatingSelector.getSelectedItem().toString().equals("Repeating"),
                                address.getText().toString()
 
                        );
