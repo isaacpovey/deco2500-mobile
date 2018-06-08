@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -21,6 +23,7 @@ public class Login extends AppCompatActivity {
     private TextView email;
     private TextView password;
     private Button signUp;
+    private boolean isError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,8 @@ public class Login extends AppCompatActivity {
         this.signUp = findViewById(R.id.signup);
         setButtonHandler(signUp);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        this.email.addTextChangedListener(getEmailTextWatcher(this.email));
+        isError = false;
     }
 
     private void setButtonHandler(Button button) {
@@ -49,8 +54,35 @@ public class Login extends AppCompatActivity {
     }
 
     private void completeSignUp(String email) {
-        Intent intent = new Intent(Login.this, PersonalDetails.class);
-        intent.putExtra("EMAIL", email);
-        startActivity(intent);
+        if (!isError) {
+            Intent intent = new Intent(Login.this, PersonalDetails.class);
+            intent.putExtra("EMAIL", email);
+            startActivity(intent);
+        }
+    }
+
+    private TextWatcher getEmailTextWatcher(final TextView email) {
+        return new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().matches("^(.+)@(.+)$")){
+                    email.setError(null);
+                    isError = false;
+                } else {
+                    email.setError("Please enter valid Email");
+                    isError = true;
+                }
+            }
+        };
     }
 }
